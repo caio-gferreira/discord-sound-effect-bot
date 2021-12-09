@@ -23,34 +23,13 @@ client.on('message', async msg => {
   if (!msg.content.startsWith(prefixo)) return;
 
   if (msg.content === prefixo + 'join') {
-    servers.server.connection = (await msg.member.voice.channel.join())
+      servers.server.connection = (await msg.member.voice.channel.join())
+    }
+    const sound = msg.content.replace(/#play /gi, '')
     
-  }
-
-  switch(msg.content) {
-      case prefixo + 'play boom':
-        servers.server.connection = (await msg.member.voice.channel.join()).play('./sounds/boom.mp3');
-        break;
-    case prefixo + 'play cow':
-        servers.server.connection = (await msg.member.voice.channel.join()).play('./sounds/cow.mp3');
-        break;
-    case prefixo + 'play hehe':
-        servers.server.connection = (await msg.member.voice.channel.join()).play('./sounds/hehe.mp3');
-        break;
-    case prefixo + 'play horse':
-        servers.server.connection = (await msg.member.voice.channel.join()).play('./sounds/horse.mp3');
-        break;
-    case prefixo + 'play rusbe':
-        servers.server.connection = (await msg.member.voice.channel.join()).play('./sounds/rusbe.mp3');
-        break;
-    case prefixo + 'play badum':
-        servers.server.connection = (await msg.member.voice.channel.join()).play('./sounds/badum.mp3');
-        break;
-    default:
-        break
-  }
-
-
+    if (msg.content ===  `${prefixo}play ${sound}`) {
+        servers.server.connection = (await msg.member.voice.channel.join()).play(`./sounds/${sound}.mp3`);
+    }
 });
 
 client.login(token);
